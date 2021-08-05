@@ -1,0 +1,155 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../styles/themes";
+@import "../../../app.component.scss";
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+  }
+
+  nb-action {
+    height: auto;
+    display: flex;
+    align-content: center;
+  }
+
+  nb-user {
+    cursor: pointer;
+  }
+
+  ::ng-deep nb-search button {
+    padding: 0 !important;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    .sidebar-toggle {
+      @include nb-ltr(padding-right, 1.25rem);
+      @include nb-rtl(padding-left, 1.25rem);
+      text-decoration: none;
+      color: nb-theme(text-hint-color);
+      nb-icon {
+        font-size: 1.75rem;
+      }
+    }
+
+    .logo {
+      padding: 0 1.25rem;
+      font-size: 1.75rem;
+      @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+      @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+      white-space: nowrap;
+      text-decoration: none;
+    }
+  }
+
+  .direction-switcher {
+    @include nb-ltr(margin-left, 2rem);
+    @include nb-rtl(margin-right, 2rem);
+  }
+
+  @include media-breakpoint-down(sm) {
+    .control-item {
+      display: none;
+    }
+    .user-action {
+      border: none;
+      padding: 0;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    nb-select,
+    .direction-switcher {
+      display: none;
+    }
+  }
+}
+.red-warning {
+  color: red !important;
+}
+
+.green-warning {
+  color: green !important;
+}
+.customScrollBar {
+  overflow-y: auto;
+}
+::ng-deep {
+  .filters-panel {
+    width: 99%;
+    //position: absolute;
+    z-index: 10;
+    float: right;
+    height: 0px;
+    .filter {
+      float: right;
+      height: 33px;
+      width: 100px;
+      background-color: $skycolor;
+      margin: 10px 20px 0 0;
+      border-radius: 8px;
+      padding: 7px;
+      font-size: 0.8em;
+      text-align: center;
+      cursor: pointer;
+      img {
+        margin-right: 5px;
+      }
+      mat-menu {
+        margin-top: 20px;
+      }
+    }
+    .notification-panel {
+      background-color: transparent !important;
+      width: 50px;
+      margin: 0px 10px 0 0;
+      .notification-icon {
+        color: $skycolor;
+        font-size: 30px !important;
+      }
+    }
+  }
+
+  .notificationContent {
+    background-color: $skycolor;
+    padding: 10px;
+    border-color: $skycolor !important;
+    margin-top: 8px;
+    margin-right: 5px;
+    .date {
+      color: $bluecolor;
+      font-weight: 500;
+      font-size: 11px;
+    }
+    .heading {
+      color: $bluecolor;
+    }
+    table tr {
+      font-size: 12px;
+      //border-bottom: 1px solid lightgray;
+    }
+    table td {
+      padding: 7px 3px;
+      color: $bluecolor;
+    }
+    .customScrollBar {
+      overflow-y: auto;
+    }
+    .notification-footer {
+      //position: absolute;
+      text-align: center;
+      padding-top: 5px;
+    }
+  }
+}

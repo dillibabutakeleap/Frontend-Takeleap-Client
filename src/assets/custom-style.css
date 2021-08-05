@@ -1,0 +1,68 @@
+.logo{
+    border-left: none!important;
+}
+nb-layout-header nav{
+    background-color: #FCC320!important;
+    box-shadow: none!important;
+}
+ngx-dashboard{
+    height: 100%;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+a{
+    color: #1A347F!important;
+    cursor: pointer!important;
+}
+
+.btn-blue, .btn-blue:hover{
+    background-color: #1A347F!important;
+    color: #fff!important;
+    margin: 10px!important;
+    padding-right: 25px!important;
+    padding-left: 25px!important;
+}
+
+.btn-blue-empty, .btn-blue-empty:hover{
+    border-color: #1A347F!important;
+    color: #1A347F!important;
+    margin: 10px!important;
+    padding-right: 25px!important;
+    padding-left: 25px!important;
+}
+
+.btn-yellow, .btn-yellow:hover{
+    border-color: #FCC320!important;
+    background-color: #ffeebc!important;
+    color: #1A347F!important;
+    margin: 10px!important;
+    padding-right: 25px!important;
+    padding-left: 25px!important;
+}
+
+.opacity-5{
+    opacity: 0.5;
+}
+
+.uploadStepPanel{
+    background-color:#e3eaff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.32);
+    border: 1px solid rgba(0,0,0,.32);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.mat-dialog-container{
+    background-color: transparent!important;
+    box-shadow: none!important;
+}
+
+.no-padding{
+    padding: 0px!important;
+}
+

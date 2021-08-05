@@ -1,0 +1,19 @@
+<div class="alert-box">
+    <div class="alert-content">
+        <span style="font-size: 16x;"><strong>Videos already exists on Server</strong></span>
+        <br>
+        <div class="tablecontent customScrollBar">
+            <table>
+                <tr *ngFor="let file of videoNames">
+                    <td><input type="checkbox" id="{{file.name}}" [checked]="file.selected" (change)="ChangeStatus(file)"><label for="{{file.name}}">
+                            {{file.name}}</label></td>
+                </tr>
+            </table>
+        </div>
+        <br><br>
+        <div class="col-md-12 text-center">
+            <button class="btn btn-blue"  value="discard" (click)="Discard()">Discard Selected</button>
+            <button class="btn btn-blue-empty" value="cancel" (click)="Process()">Process Selected</button>
+        </div>
+    </div>
+</div>

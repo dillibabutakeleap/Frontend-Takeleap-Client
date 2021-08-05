@@ -1,0 +1,47 @@
+<div class="col-md-12" class="htmlData">
+    <div class="PrintBlock" class="col-md-12 no-padding" *ngFor="let anomaly of anomalies;let index=index" id="htmlData{{index}}">
+        <br>
+        <div class="col-md-12" style="margin:20px -30px -30px;height: 75px;">
+            <img class="float-right" width="200" src="../../../../../assets/images/logo/login_logo.png"/>
+        </div>
+        <br>
+        <table class="table" >
+            <tr cellspacing="5">
+                <th>S.NO</th>
+                <th>SITE</th>
+                <th>CHAINAGE-DIRECTION</th>
+                <th>POSITION</th>
+                <th>SIDE</th>
+                <th>ASSETS</th>
+            </tr>
+            <tr class="blueBotomBorder">
+                <td>{{index + 1}}</td>
+                <td>{{anomaly.Plaza}}</td>
+                <td>{{anomaly.Chainage}}</td>
+                <td>{{anomaly.Pos}}</td>
+                <td>{{anomaly.Side}}</td>
+                <td>{{anomaly.Asset}}</td>
+            </tr>
+            <tr>
+                <td colspan="6" >
+                    <img src="../../../../assets/images/anomaly-placeholder.png" *ngIf="!anomaly.Frame_Master"/>
+                    <img width="1000" src="../../../../assets/images/algorithm/{{anomaly.Frame_Master}}" *ngIf="anomaly.Frame_Master"/>
+                    <span>Master Data</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" >
+                    <br><br>
+                    <img src="../../../../assets/images/anomaly-placeholder.png" *ngIf="!anomaly.Frame_Test"/>
+                    <img  width="1000"  src="../../../../assets/images/algorithm/{{anomaly.Frame_Test}}" *ngIf="anomaly.Frame_Test"/>
+                    <span>Test Data</span>
+                </td>
+            </tr>
+            
+            <tr>
+
+            </tr>
+        </table>
+        <div style="page-break-after:always">&nbsp;</div> 
+    </div>
+</div>

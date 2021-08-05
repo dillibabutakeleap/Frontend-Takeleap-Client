@@ -1,0 +1,28 @@
+<div class="row h-100 justify-content-center align-items-center dashboard-layout">
+  <!-- <nb-card>
+    <nb-card-body>Hello from ngx-admin sandbox project.</nb-card-body>
+  </nb-card> login-form text-center-->
+  <div class="col-md-12 " style="height: 200px;">
+    <div *ngIf="videosInProgress == null || videosInProgress.length == 0"
+      class="col-lg-12 float-left justify-content-center align-items-center" style="display: grid;">
+      <div class="buttons" (click)="uploadVideoStep1()">
+        <img width="150" src="../../../assets/images/upload_dash.png" />
+        <span>Upload Files</span>
+      </div>
+    </div>
+    <div *ngIf="totalProgress <100 && videosInProgress!=null && videosInProgress.length > 0"
+      class="col-lg-12 float-left  clearfix justify-content-center align-items-center" style="display: grid;">
+      <div class="buttons" (click)="uploadVideoStep3()">
+        <br>
+        <span>Processing <br>{{totalProgress | number : '1.1-1'}}%</span>
+        <br>
+        <mat-progress-bar mode="determinate" value="{{totalProgress}}"></mat-progress-bar>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-12 float-left skiplblock">
+      <a (click)="navigateToFeed()">Skip to the activity feeds</a>
+    </div>   -->
+  </div>
+
+</div>

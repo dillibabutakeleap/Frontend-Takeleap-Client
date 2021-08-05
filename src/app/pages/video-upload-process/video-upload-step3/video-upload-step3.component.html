@@ -1,0 +1,37 @@
+<div class="row h-100 step2 uploadStepPanel">
+    <div class="col-md-12">
+        <a class="closeBox" (click)="closeBox()"><img width="20"
+                src='../../../../../assets/images/close-commentbox-icon.png'></a>
+        <br>
+        <br>
+        <mat-progress-bar mode="determinate" value="{{totalProgress}}"></mat-progress-bar>
+        <span class="progress-number-yellow" *ngIf="totalProgress > 0">{{totalProgress | number : '1.1-1'}}%</span>
+        <br>
+        <div class=" uploadcontent customScrollBar" *ngIf="showDetails && selectedFiles">
+            <div class="video float-left" *ngFor="let file of selectedFiles" (click)="fileClick(file)">
+                <div class="video-content" [class]="file.isSelected == true ? 'videoBorder-noBottom' : ''">
+
+                    <span class="videoName" title="{{file.name}}">{{file.name}}</span>
+                    <br>
+                </div>
+                <div class="video-footer" [class]="file.isSelected == true ? 'videoBorder-noTop' : ''">
+                    <mat-progress-bar mode="determinate" *ngIf="file.progress" value="{{file.progress}}">
+                    </mat-progress-bar>
+                    <mat-progress-bar mode="indeterminate" *ngIf="!file.progress"></mat-progress-bar>
+                    <span class="progress-number-blue" *ngIf="file.progress > 0">{{file.progress | number :
+                        '1.0'}}%</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <button *ngIf="selectedForDelete.length > 0 && showDetails" class="btn btn-blue-empty" (click)="stop()"
+                value="stop">Stop</button>
+            <a *ngIf="showDetails" (click)="toggleDetails()">Hide Details</a>
+            <a *ngIf="!showDetails" (click)="toggleDetails()">Show Details</a>
+            <button class="btn btn-blue-empty" (click)="uploadMore()">Upload
+                More</button>
+        </div>
+    </div>
+    <br>
+
+</div>

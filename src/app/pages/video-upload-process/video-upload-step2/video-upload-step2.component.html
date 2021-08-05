@@ -1,0 +1,66 @@
+<div class="row h-100 step2 uploadStepPanel">
+    <div class="col-md-12 header">
+        <span>{{dayType}} - {{assetType}}</span>
+        <a (click)="closeBox()"><img width="20" src='../../../../../assets/images/close-commentbox-icon.png'></a>
+    </div>
+    <div class="col-md-12">
+
+        <div class=" uploadcontent customScrollBar" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
+            <div id="drop_zone" class="row  justify-content-center align-items-center"
+                [class]="selectedFiles.length==0 ? 'h-100' : '' ">
+                <div style="display: block;text-align: center;width: 100%;">
+                    <img width="50" src="../../../../assets/images/file.png" *ngIf="selectedFiles.length == 0" />
+                    <p style="display: block;text-align: center;width: 100%;padding: 10px;">Drag and drop files here...
+                        OR <button class="btn btn-blue-empty" (click)="openFileDialog()" value="browse">Browse
+                            <input id="openFileDialog" type="file" style="display:none"
+                                (change)="handleFileInput($event.target.files,$event)"  multiple>
+                        </button>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="video float-left" *ngFor="let file of selectedFiles" (click)="fileClick(file)">
+                <div class="video-content" [class]="file.isSelected == true ? 'videoBorder-noBottom' : ''">
+                    <span class="videoName" title="{{file.fileName}}">{{file.fileName}}</span>
+                    <br>
+                    <mat-progress-bar  mode="determinate" value="{{file.uploadProgress}}"></mat-progress-bar>
+                    <br>
+                    <!-- <span *ngIf="(file.uploadProgress < 100 && file.uploadProgress > 0) || totalUploadPercent > 0">Uploading...</span> -->
+                </div>
+                <div class="video-footer" [class]="file.isSelected == true ? 'videoBorder-noTop' : ''">
+                    <p class="float-left">{{currentDate}}</p>
+                    <p class="float-right">{{file.size | number: '1.2-2'}}mb</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12 text-center">
+        <div class="float-left sizestats" *ngIf="totalFileSize">
+            <span >Files :  {{selectedFiles.length}}</span>
+            <br>
+            <span>File Size :  {{totalFileSize | number : '1.2-2' }}mb</span>
+            <br>
+            <span *ngIf="availableDiskSize">Available Disk :  {{availableDiskSize | number : '1.2-2' }}mb</span>
+            <br>
+            
+        </div>
+        
+        <button  [ngClass]="selectedForDelete.length==0 ? 'opacity-5' :''" class="btn btn-blue-empty"
+            (click)="deleteFiles()" value="delete" [disabled]="isUploading || (selectedForDelete.length == 0)">Delete</button>
+        <button class="opacity-5" class="btn btn-yellow"
+             value="delete" disabled>Group</button>
+        <button class="btn btn-blue" value="Next" (click)="uploadFiles()" [disabled]="isUploading">Process</button>
+    </div>
+
+    <!-- <mat-tab-group class="col-md-12">
+        <mat-tab label="Upload">
+            
+        </mat-tab>
+     
+    </mat-tab-group> -->
+
+
+</div>

@@ -1,0 +1,15 @@
+@import '../../../../../app/app.component.scss';
+.tablecontent{
+    max-height: 250px;
+    overflow-y: auto;
+}
+.btn-blue-empty, .btn-blue{
+    width: auto!important;
+}
+table{
+    
+    label{
+        margin-left: 5px;
+        color: $bluecolor;
+    }
+}

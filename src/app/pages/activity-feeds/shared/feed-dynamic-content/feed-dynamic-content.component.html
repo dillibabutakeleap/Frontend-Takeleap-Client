@@ -1,0 +1,99 @@
+<div class="col-md-9 float-left no-padding" >
+    <div class="content-header col-md-12">
+        <div class="col padding-top17px" style="width:7%;">#ID</div>
+        <div class="col padding-top17px" style="width:7%;">PLAZA</div>
+        <div class="col" style="padding-top:14px;cursor: pointer;" (click)="sortByDate()" *ngIf="selectedTabIndex == 0">DATE
+            <img src="../../../../../assets/images/arrow-up.png" *ngIf="this.issortByDateAsc" width="20"/>
+            <img src="../../../../../assets/images/arrow-down.png" *ngIf="!this.issortByDateAsc" width="20"/>
+        </div>
+        <div class="col padding-top17px" *ngIf="selectedTabIndex > 0">DATE</div>
+        <div class="col padding-top17px" style="width:8%;">CHAINAGE</div>
+        <div class="col padding-top17px" style="width:12%;">LAT/LONG</div>
+        <div class="col padding-top17px">ANOMALY</div>
+        <div class="col padding-top17px" style="width:9%;">SIDE</div>
+        <div class="col" style="width:9%;">ANOMALY<BR>True/False</div>
+        <div class="col padding-top17px" style="width:9%;">FEATURES</div>
+        <div class="col padding-top17px" style="width:8%;">COMMENTS</div>
+        <div class="col padding-top17px" style="width:7%;">CHECKED</div>
+    </div>
+    <div id="anomalies" class="content customScrollBar col-md-12" [style.height.px]="myInnerHeight" (scroll)="scrollHandler($event)">
+        <div class="col" *ngIf="!anomalies || anomalies.length == 0">No Data.</div>
+        <div class="col-md-12" *ngIf="anomalies && anomalies.length > 0"><strong>{{totalAnomalyCount}} Anomalies</strong>
+           
+        </div>
+        <div tabindex="10" *ngFor="let anomaly of anomalies; let i = index" [@anim]="anomaly.animation"
+            [class]="anomaly.isSelected ? 'row-active' : ''" class="row" (click)="RowSelected(anomaly)" style="display: flow-root;" >
+            <div class="col padding-top17px" style="width:5%;">#{{anomaly.id}}</div>
+            <div class="col padding-top17px" style="width:9%;">{{anomaly.Plaza}}</div>
+            <div class="col padding-top17px" style="width:10.5%;">{{anomaly.Created_on}}</div>
+            <div class="col padding-top17px" style="width:7.5%;">{{anomaly.Chainage}}</div>
+            <div class="col padding-top17px" style="width:12.5%;">{{anomaly.Pos}}</div>
+            <div class="col padding-top17px" >{{anomaly.Asset}}</div>
+            <div class="col padding-top17px" style="width:9%;">{{anomaly.Side}}</div>
+            <div class="col " style="width:10%;">
+                <div (click)="sliderChange($event,anomaly)">
+                <mat-slider autofocus   [attr.id]="'anomaly-'+tabIndex +'-'+i" min="0" max="100"
+                    step="50" [(value)]="anomaly.anomaly_status_slider"></mat-slider>
+                </div>
+            </div>
+            <div class="col padding-top17px" style="width:9%;">
+                <a [attr.id]="'anomalyStatus-' + tabIndex + '-' + i" (click)="statusClick(i)" mat-button [matMenuTriggerFor]="belowMenu" *ngIf="anomaly.Audit_value; else elseBlock">{{anomaly.Audit_value}}</a>
+                <ng-template #elseBlock><a [attr.id]="'anomalyStatus-' + tabIndex + '-' + i" (click)="statusClick(i)" mat-button [matMenuTriggerFor]="belowMenu" >Status</a></ng-template>
+                
+                <mat-menu (closed)="MenuClosed()"  #belowMenu="matMenu" yPosition="below" >
+                    <div class="left" *ngIf="anomaly.anomaly_status_slider == 0">
+                        <input id="'anomalyleft-bent-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i"  type="radio" mat-menu-item value="bent" [checked]="anomaly.Audit_value == 'bent'? true:false" ><label class="lbl" for="'anomalyleft-bent-'+i">Bent</label><br>
+                        <input  id="'anomalyleft-broken-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="broken" [checked]="anomaly.Audit_value == 'broken'? true:false"><label class="lbl" for="'anomalyleft-broken-'+i">Broken</label><br>
+                        <input  id="'anomalyleft-missing-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="missing" [checked]="anomaly.Audit_value == 'missing'? true:false"><label class="lbl" for="'anomalyleft-missing-'+i">Missing</label><br>
+                        <input  id="'anomalyleft-plant_overgrown-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="plant_overgrown" [checked]="anomaly.Audit_value == 'plant overgrown'? true:false"><label class="lbl" for="'anomalyleft-plant_overgrown-'+i">Plant Overgrown</label><br>
+                        <input  id="'anomalyleft-others-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="others" [checked]="anomaly.Audit_value == 'others'? true:false"><label class="lbl" for="'anomalyleft-others-'+i">Others</label>
+                    </div>
+                    <div class="right" *ngIf="anomaly.anomaly_status_slider == 100">
+                        <input  id="'anomalyleft-vehicle_occlusion-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="vehicle_occlusion" [checked]="anomaly.Audit_value == 'vehicle occlusion'? true:false" ><label class="lbl" for="'anomalyleft-vehicle_occlusion-'+i">Vehicle Occlusion</label><br>
+                        <input  id="'anomalyleft-low_light_condition-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="low_light_condition" [checked]="anomaly.Audit_value == 'low light condition'? true:false"><label class="lbl" for="'anomalyleft-low_light_condition-'+i">Low Light Condition</label><br>
+                        <input  id="'anomalyleft-image_mismatch-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="image_mismatch" [checked]="anomaly.Audit_value == 'image mismatch'? true:false" ><label class="lbl" for="'anomalyleft-image_mismatch-'+i">Image Mismatch</label><br>
+                        <input  id="'anomalyright-others-'+i" (change)="audit_value_changed($event)" [attr.name]="'anomalyleft-'+i" type="radio" mat-menu-item value="others" [checked]="anomaly.Audit_value == 'others'? true:false"><label class="lbl" for="'anomalyright-others-'+i">Others</label>                       
+                    </div>
+                    
+                </mat-menu>
+
+            </div>
+            <div class="col padding-top17px" style="width:8%;"><a class="comment" (click)="comment(anomaly)">Comment</a></div>
+            <div class="col padding-top17px" style="width:7%;"><input type="checkbox" class="submit" (change)="onCheckSubmitChange($event,anomaly)" [checked]="anomaly.IsAudited"></div>
+        </div>
+
+
+    </div>
+</div>
+<div class="col-md-3 float-left no-padding" >
+    <div class="content-header text-center" style="padding: 10px;">
+        PREVIEW 
+    </div>
+    <div class="content customScrollBar" [style.height.px]="myInnerHeight+20">
+        <div class="images-section" (click)="magnifyImages(anomalies[selectedAnomalyIndex])">
+            <!-- *ngIf="anomalies[selectedAnomalyIndex]" (click)="magnifyImages(anomalies[selectedAnomalyIndex])" -->
+            <div class="image">
+                <div class="image-content">
+                    <img src="../../../../assets/images/master_image_not_available.png" *ngIf="!anomalies || anomalies.length == 0 || !anomalies[selectedAnomalyIndex].Frame_Master"/>
+                    <img src="../../../../assets/images/algorithm/{{anomalies[selectedAnomalyIndex].Frame_Master}}" *ngIf="anomalies && anomalies.length > 0 && anomalies[selectedAnomalyIndex].Frame_Master"/>
+                </div>
+                <div class="image-footer">
+                    <p>MASTER IMAGE</p>
+                </div>
+            </div>
+            <div class="image">
+                <div class="image-content">
+                    <img  src="../../../../assets/images/shift_image_not_available.png" *ngIf="!anomalies || anomalies.length == 0 || !anomalies[selectedAnomalyIndex].Frame_Test"/>
+                    <img src="../../../../assets/images/algorithm/{{anomalies[selectedAnomalyIndex].Frame_Test}}" *ngIf="anomalies && anomalies.length > 0 && anomalies[selectedAnomalyIndex].Frame_Test"/>
+                </div>
+                <div class="image-footer">
+                    <p>ANOMALY IMAGE</p>
+                </div>
+            </div>
+            <!-- <div class="float-right enlarge-text">
+                <a>Enlarge Image</a>
+                <img width="25" src="../../../../assets/images/magnify.jpg">
+            </div> -->
+        </div>
+    </div>
+</div>

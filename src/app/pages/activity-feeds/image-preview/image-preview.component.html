@@ -1,0 +1,53 @@
+<div class="col-md-12 image-dialog images-section" [style.width.px]="windowWidth">
+    <div class="col-md-12 closebox">
+        <a (click)="closeBox()"><img width="20" src='../../../../assets/images/close-commentbox-icon.png'></a>
+    </div>
+
+    <div class="col-md-6 float-left" *ngIf="master">
+        <div class="image">
+            <div class="image-content">
+
+                <lib-ngx-image-zoom [thumbImage]="master" [magnification]="masterMagnifyVal" [enableScrollZoom]="true"
+                    [enableLens]="false" [zoomMode]="'hover'" (zoomScroll)="zoomScroll($event)" *ngIf="master">
+                </lib-ngx-image-zoom>
+            </div>
+            <div class="image-footer">
+                <p>MASTER IMAGE</p>
+            </div>
+        </div>
+    </div>
+    <div class=" float-left" [ngClass]="master ? 'col-md-6' : 'col-md-12'">
+        <div class="image">
+            <!-- <div class="image-content" id="zoom1" >
+                <img src="../../../../assets/images/anomaly-placeholder.png" *ngIf="!anomaly"/>
+                <lib-ngx-image-zoom   [thumbImage]="anomaly"  
+                [magnification]="masterMagnifyVal"
+                [enableScrollZoom]="true"
+                [enableLens]="false"
+                [zoomMode]="'hover'"
+                (zoomScroll)="zoomScroll($event)" *ngIf="anomaly"
+                >
+                </lib-ngx-image-zoom>
+            </div> -->
+            <div class="image-content">
+                <ngb-carousel activeId="{{selectedSlide}}" (slide)="prevSlide($event)" #myCarousel="ngbCarousel">
+                    <ng-template ngbSlide *ngFor="let img of anomaly;let i = index;" id="{{i}}">
+                        <img src="../../../../assets/images/anomaly-placeholder.png" *ngIf="!img" />
+
+                        <lib-ngx-image-zoom [thumbImage]="'../../../../assets/images/algorithm/' + img.src"
+                         [fullImage]="'../../../../assets/images/algorithm/' + img.src"
+                            [magnification]="masterMagnifyVal" [enableScrollZoom]="true" [enableLens]="false"
+                            [zoomMode]="'hover'" (zoomScroll)="zoomScroll($event)" *ngIf="img" minZoomRatio="0">
+                        </lib-ngx-image-zoom>
+
+                    </ng-template>
+
+                </ngb-carousel>
+            </div>
+            <div class="image-footer" (click)="animateImage()">
+                <p>ANOMALY IMAGE</p>
+            </div>
+        </div>
+    </div>
+
+</div>

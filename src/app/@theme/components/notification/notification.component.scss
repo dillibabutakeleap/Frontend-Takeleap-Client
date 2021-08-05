@@ -1,0 +1,14 @@
+@import '../../../../app/app.component.scss';
+.notification-panel{
+    background-color: white;
+    border-radius: $divradius;
+    height: 400px;
+    .message{
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: $bluecolor;
+        border-radius: $divradius;
+        margin: 10px;
+    }
+}

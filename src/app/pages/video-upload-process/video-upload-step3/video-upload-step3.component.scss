@@ -1,0 +1,73 @@
+@import '../video-upload-step2/video-upload-step2.component.scss';
+
+.mat-progress-bar{
+    height: 15px!important;
+    border-radius: $divradius;
+}
+
+.closeBox{
+    float: right;
+}
+// .mat-progress-bar-fill::after{
+//     background-color: $bluecolor!important;
+// }
+
+.progress-number-blue{
+    display: block;
+    color: $bluecolor;
+    margin-top: -15px;
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+    /* width: 100%; */
+    padding-left: 5px;
+    margin-left: -5px;
+}
+
+.progress-number-yellow{
+    display: block;
+    color: #fdcf4d;
+    margin-top: -16px;
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    /* width: 100%; */
+    padding-left: 5px;
+    margin-left: 25px;
+    width:90%;
+}
+.uploadStepPanel{
+    overflow: hidden;
+}
+
+.uploadcontent{
+    background-color: transparent!important;
+    height: auto!important;
+    min-height: 100px ;
+    max-height: 300px;
+    margin:0!important;
+
+    .video-content{
+        background-color: white!important;
+        
+        
+    }
+    .video-footer{
+        background-color: $bluecolor!important;
+        padding: 7px;
+        
+    }
+}
+
+::ng-deep 
+{
+    .video-footer{
+        .mat-progress-bar-fill::after{
+            background-color: #fdcf4d!important;
+        }
+        
+    }
+    .mat-progress-bar-buffer{
+        background-color: white!important;
+    }
+}

@@ -1,0 +1,42 @@
+@import '../../../app.component.scss';
+
+.alert-box{
+    border-radius: $divradius;
+    background-color: white;
+    //width: 300px;
+    .alert-header{
+        height: 40px;
+        background-color:$light-yellowcolor;// $bluecolor;
+        border-radius: $divradius $divradius 0px 0px ;
+        width: 100%;
+        text-align: right;
+        padding: 10px;
+        span{
+            float: left;
+            display: block;
+            color: white;
+        }
+    }
+    .alert-content{
+        padding: 20px;
+        background-color: $light-yellowcolor;//$skycolor;
+        border-radius: $divradius ;
+        min-height:100px ;
+        span{
+            text-align: center;
+            display: block;
+            color:$bluecolor;
+        }
+        button{
+            width: 28%;
+            min-width: 100px;
+            //margin-top: 20px;
+        }
+    }
+    .btn-white, .btn-white:hover{
+        background-color:#fff!important;
+        color: $bluecolor!important;
+        margin: 10px!important;
+        border: 1px solid $bluecolor;
+    }
+}

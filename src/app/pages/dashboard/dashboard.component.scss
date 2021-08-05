@@ -1,0 +1,63 @@
+
+
+
+.dashboard-layout
+  {
+    background-image:url('../../../assets/images/backgrounds/login_bg.png');   //'../../../../assets/images/backgrounds/login_bg.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    .buttons{
+        border-radius: 20px;
+        background: #1A347F;
+        padding: 20px;
+        width: 220px;
+        height: 200px;
+        text-align: center;
+        margin: auto;
+        vertical-align: middle;
+        display: table-cell;
+        cursor: pointer;
+        span{
+            display: block;
+            text-align: center;
+            color: #fff!important;
+            
+        }
+    }
+
+
+    .buttons a img{
+        display: block;
+        margin: auto;
+    }
+    
+    .buttons a span{
+        margin-top: -70px;
+        display: block;
+        
+    }
+    
+    .skiplblock{
+        margin-top: 120px;
+        display: block;
+        text-align: center;
+        a{
+            color: #1A347F!important;
+            text-decoration: underline;
+            font-size: 17px;
+        }
+    }
+    
+  }
+
+  ::ng-deep 
+  {
+      nb-layout-column{
+        padding: 0!important;  
+        
+      }
+      .content{
+        //display: none!important;
+        
+      }
+  }

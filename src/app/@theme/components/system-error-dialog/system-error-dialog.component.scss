@@ -1,0 +1,25 @@
+@import '../../../../app/app.component.scss';
+.tablecontent{
+    max-height: 250px;
+    overflow-y: auto;
+}
+.btn-blue-empty{
+    width: auto!important;
+}
+
+.alert-box{
+    width: 250px;
+    //height: 250px;
+    text-align: center;
+    color: $bluecolor;
+}
+
+.btn-blue-empty{
+    margin-top: 10px;
+}
+
+.alert-content{
+    span{
+        margin-top: 10px;
+    }
+}

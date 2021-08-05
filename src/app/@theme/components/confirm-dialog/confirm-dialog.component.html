@@ -1,0 +1,29 @@
+<!-- <div class="confirm-dialog">
+    <h1 mat-dialog-title>{{data.title}}</h1>
+    <div mat-dialog-content>
+        {{data.message}}
+    </div>
+    <div style="float:right;margin:20px;">
+        <input style="margin:0px 10px;" type="button" value="Confirm" [mat-dialog-close]="true">
+        <input type="button" value="Cancel" [mat-dialog-close]="false">
+    </div>
+</div> -->
+<div class="alert-box">
+    <!-- <div class="alert-header">
+        <span>{{data.title}}</span>
+        <a [mat-dialog-close]="false"><img width="20" src='../../../../assets/images/close-commentbox-icon.png'></a> 
+    </div> -->
+    <div class="alert-content">
+        <!-- <a [mat-dialog-close]="false"><img width="20" src='../../../../assets/images/close-commentbox-icon.png'></a>  -->
+        <span style="font-size: 16x;"><strong>{{data.title}}</strong></span>
+        
+        <span>
+            {{data.message}}
+        </span>
+        <br>
+        <div class="col-md-12 text-center">
+            <button class="btn btn-blue" value="Cancel"  (click)="confirm(false)">{{data.cancelTitle}}</button>
+            <button class="btn btn-white" value="Confirm" (click)="confirm(true)">{{data.confirmTitle}}</button>
+        </div>
+    </div>
+</div>

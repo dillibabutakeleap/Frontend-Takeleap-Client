@@ -1,0 +1,66 @@
+$bluecolor:#1A347F;
+$yellowcolor:#FCC320;
+$skycolor:#e3eaff;
+$graycolor:#707070;
+$whitecolor:#fff;
+$divradius:10px;
+$light-yellowcolor:#ffeebc;
+$light-graycolor:#d5d5d5;
+$menu-gray:#9d9d9d;
+$menu-darkgray:#535353;
+
+.customScrollBar::-webkit-scrollbar {
+    width: 8px;
+}
+.customScrollBar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px $light-graycolor; 
+    background-color: $light-graycolor;
+    border-radius: 10px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $bluecolor;
+    -webkit-box-shadow: inset 0 0 6px $bluecolor; 
+}
+
+.alert-box{
+    border-radius: $divradius;
+    background-color: white;
+    //width: 300px;
+    .alert-header{
+        height: 40px;
+        background-color:$light-yellowcolor;// $bluecolor;
+        border-radius: $divradius $divradius 0px 0px ;
+        width: 100%;
+        text-align: right;
+        padding: 10px;
+        span{
+            float: left;
+            display: block;
+            color: white;
+        }
+    }
+    .alert-content{
+        padding: 20px;
+        background-color: $light-yellowcolor;//$skycolor;
+        border-radius: $divradius ;
+        min-height:100px ;
+        span{
+            text-align: center;
+            display: block;
+            color:$bluecolor;
+        }
+        button{
+            width: 28%;
+            min-width: 100px;
+            //margin-top: 20px;
+        }
+    }
+    .btn-white, .btn-white:hover{
+        background-color:#fff!important;
+        color: $bluecolor!important;
+        margin: 10px!important;
+        border: 1px solid $bluecolor;
+    }
+}

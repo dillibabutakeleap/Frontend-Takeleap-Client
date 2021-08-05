@@ -1,0 +1,26 @@
+@import '../../../app.component.scss';
+
+.alert-box{
+    border-radius: $divradius;
+    background-color: white;
+    width: 300px;
+    .alert-header{
+        height: 40px;
+        background-color: $bluecolor;
+        border-radius: $divradius $divradius 0px 0px ;
+        width: 100%;
+        text-align: right;
+        padding: 10px;
+    }
+    .alert-content{
+        padding: 20px;
+        background-color: $skycolor;
+        border-radius: 0px 0px $divradius $divradius;
+        min-height:100px ;
+
+        button{
+            width: 100px;
+            margin-top: 20px;
+        }
+    }
+}

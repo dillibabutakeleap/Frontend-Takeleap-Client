@@ -1,0 +1,26 @@
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-md-4 login-form text-center" >
+        <img width="300" src="../../../../assets/images/logo/login_logo.png">
+        <br><br><br>
+        <!-- <form  (keydown)="keyDownFunction($event)"> -->
+            <div class="form-group">
+                <input  type="email" (keydown)="keyDownFunction($event)" class="form-control textbox-rounded" placeholder="Admin" [(ngModel)]="username"/>
+            </div>
+            <div class="form-group">
+                <input type="password" (keydown)="keyDownFunction($event)" class="form-control textbox-rounded" placeholder="Password" [(ngModel)]="password" />
+            </div>
+            <!-- <div>
+                <a  class="float-left">New Member?</a>
+                <a  class="float-right">Forgot Password?</a>
+            </div> -->
+            <br><br><br>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="login()" [disabled]="!(username && password)">LOGIN</button>
+            </div>
+            <div class="text text-danger" *ngIf="isInvalid">
+                Invalid Credentials
+            </div>
+        <!-- </form> -->
+
+    </div>
+</div>

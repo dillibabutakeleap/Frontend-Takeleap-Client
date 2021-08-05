@@ -1,0 +1,10 @@
+<div class="comment-box">
+    <div class="comment-header">
+        <a (click)="closeBox()"><img width="20" src='../../../../../assets/images/close-commentbox-icon.png'></a>
+    </div>
+    <div class="comment-content">
+        <!-- <input type="textarea" [ngModel]=""/> -->
+        <textarea  [(ngModel)]="comment"></textarea>
+        <div class="col-md-12 text-center"><button class="btn btn-blue" value="Save" (click)="save()">Save</button></div>
+    </div>
+</div>

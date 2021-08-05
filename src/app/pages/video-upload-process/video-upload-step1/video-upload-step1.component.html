@@ -1,0 +1,38 @@
+<div class="row h-100 step1 uploadStepPanel">
+    <div class="col-md-12 ">
+        <div class="col-md-6 float-left">
+            <a (click)="changeDay(true)">
+                <img width="75" src="../../../../assets/images/day-active.png" *ngIf="isDay" />
+                <img width="75" src="../../../../assets/images/day-inactive.png" *ngIf="!isDay" />
+            </a>
+            <a (click)="changeDay(false)">
+                <img width="75" src="../../../../assets/images/nigth-inactive.png" *ngIf="isDay" />
+                <img width="75" src="../../../../assets/images/night-active.png" *ngIf="!isDay" />
+            </a>
+        </div>
+        
+    </div>
+    <br>
+    <div class="col-md-12 assetsPanel" *ngIf="isDay">
+            <input type="radio" id="fixedAsset" name="assetType" value="fixed" [(ngModel)]="assetType"><label for="fixedAsset">Fixed Assets</label><br>
+            <input type="radio" id="linearAsset" name="assetType" value="linear" [(ngModel)]="assetType">
+            <label for="linearAsset">Linear Assets</label><br>
+            <ul *ngIf="assetType == 'linear'">
+                <li>
+                    <input type="radio" id="thermoplastic" name="linearAssetType" value="thermoplastic-paint" [(ngModel)]="linearAssetType"><label for="thermoplastic">Thermoplastic Paint</label><br>
+                </li>
+                <li>
+                    <input type="radio" id="otherLinears" name="linearAssetType" value="other-linears" [(ngModel)]="linearAssetType"><label for="otherLinears">Other Linears</label><br>
+                </li>
+            </ul>
+            <input type="radio" id="simultaneaousAsset" name="assetType" value="simultaneous-processing" [(ngModel)]="assetType"><label for="simultaneaousAsset">Simultaneous Processing</label><br>
+    </div>
+    <div class="col-md-12 assetsPanel" *ngIf="!isDay">
+        <input type="radio" name="assetType" id="Electrical" value="electrical-reflective" [(ngModel)]="assetType"><label for="Electrical">Electrical & Reflective Assets</label><br>
+        <input type="radio" name="assetType" id="Raised" value="raised-pavement-markers" [(ngModel)]="assetType"><label for="Raised">Raised Pavement Markers</label><br>
+    </div><br>
+    <div class="col-md-12 text-center">
+            <button mat-button mat-dialog-close class="btn btn-blue-empty" value="cancel" (click)="close()">Cancel</button>
+            <button class="btn btn-blue" value="Next" (click)="nextStep()">Next</button> 
+    </div>
+</div>

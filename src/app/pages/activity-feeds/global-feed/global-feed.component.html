@@ -1,0 +1,214 @@
+<div class="row global-feed" id="anomalies-feed">
+    <div class="filters-panel">
+        <div class="filter notification-panel" *ngIf="notifications.length > 0" mat-button
+            [matMenuTriggerFor]="belowNotificationMenu">
+            <a (click)="handleNotificationIconClicked()">
+                <mat-icon *ngIf="notificationsUnseenCount > 0" class="notification-icon"
+                    [matBadge]="notificationsUnseenCount" matBadgeColor="warn" matBadgePosition="above after">
+                    notifications
+                </mat-icon>
+                <mat-icon *ngIf="notificationsUnseenCount == 0" class="notification-icon" style="margin-top:4px">
+                    notifications
+                </mat-icon>
+            </a>
+            <mat-menu (click)="$event.stopPropagation()" class="notificationContent" #belowNotificationMenu="matMenu"
+                yPosition="below">
+                <div class="customScrollBar" [style.height.px]="myInnerHeight">
+                    <table cellpadding="5">
+                        <thead>
+                            <th colspan="3" class="heading">Notifications</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let notification of notifications;">
+                                <td width="10">
+                                    <mat-icon class="green-warning" *ngIf="notification.status == 1"
+                                        style="margin-top:-4px">
+                                        check_circle_outline
+                                    </mat-icon>
+                                    <mat-icon class="red-warning" *ngIf="notification.status == 0"
+                                        style="margin-top:-4px">
+                                        error_outline
+                                    </mat-icon>
+
+                                </td>
+                                <td>
+                                    <strong>{{notification.file_name}}</strong>
+                                    <br>
+                                    {{notification.message}}
+                                    <br>
+                                    <strong class="date">{{notification.created_on | date:'y-MM-dd HH:mm'}}</strong>
+                                </td>
+                                <td (click)="$event.stopPropagation()">
+                                    <a (click)="handleNotificationDelete(notification.id)">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="notification-footer">
+                    <a (click)="handleNotificationDelete(0)">
+                        clear all
+                    </a>
+                </div>
+            </mat-menu>
+        </div>
+        <div class="filter" style="width: 100px;" [matMenuTriggerFor]="belowExportMenu" mat-button
+            *ngIf="selectedTabIndex > 0">
+            <!-- [matMenuTriggerFor]="belowHistoryMenu" -->
+            <img width="15" src="../../../../assets/images/history-icon.png" /><a>EXPORT</a>
+            <mat-menu class="historyContent" #belowExportMenu="matMenu" yPosition="below">
+                <div class="customScrollBar" style="height: 100px;">
+                    <table class="text-center">
+                        <tbody>
+                            <tr (click)="open_popup_exportToPDF('csv')">
+                                <td>EXCEL</td>
+                            </tr>
+                            <tr (click)="open_popup_exportToPDF('pdf')">
+                                <td>PDF</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </mat-menu>
+            <mat-menu class="historyContent" #belowHistoryMenu="matMenu" yPosition="below">
+                <div class="customScrollBar" [style.height.px]="myInnerHeight">
+                    <table class="text-center">
+                        <!-- <thead>
+                            <th>DATE</th>
+                        </thead> -->
+                        <tbody>
+                            <tr (click)="ExportToPDF('all')">
+                                <td>All</td>
+                            </tr>
+                            <tr (click)="ExportToPDF('true')">
+                                <td>True</td>
+                            </tr>
+                            <tr (click)="ExportToPDF('false')">
+                                <td>False</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </mat-menu>
+        </div>
+        <div class="filter" mat-button [matMenuTriggerFor]="belowHistoryMenu">
+            <img width="15" src="../../../../assets/images/history-icon.png" /><a>HISTORY</a>
+            <mat-menu class="historyContent" #belowHistoryMenu="matMenu" yPosition="below">
+                <div class="customScrollBar" [style.height.px]="myInnerHeight">
+                    <table class="text-center">
+                        <thead>
+                            <th>DATE</th>
+                        </thead>
+                        <tbody>
+                            <tr (click)="openHistory(date.audited_on)" *ngFor="let date of historyDates;">
+                                <td>{{date.audited_on}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </mat-menu>
+        </div>
+        <div class="filter" mat-button [matMenuTriggerFor]="belowFilterMenu"
+            *ngIf="tabs[prevSelectedTabIndex-1] && prevSelectedTabIndex > 0">
+            <img width="15" src="../../../../assets/images/filter.png" /><a>FILTERS</a>
+            <mat-menu class="filterContent" #belowFilterMenu="matMenu" yPosition="below">
+                <div (keydown.tab)="$event.stopPropagation()" (click)="$event.stopPropagation()"
+                    class="col-md-12 no-padding">
+                    <div class="col-md-7 float-left">&nbsp;
+                    </div>
+                    <div class="col-md-5 float-left ">
+                        <input type="text" (input)="onAssetSearchChange($event.target.value)"
+                            class="form-control searchBox" id="search" placeholder="Search" name="Search">
+                        <!-- <img width="15" src="../../../../assets/images/search-icon.png" /> -->
+                        <span class="glyphicon glyphicon-search"></span>
+                        <i class="mega-octicon octicon-search"></i>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+                <div (keydown.tab)="$event.stopPropagation()" (click)="$event.stopPropagation()"
+                    class="col-md-12 no-padding filter-middle">
+                    <div class="col-md-7 no-padding">
+                        <div class="col-md-6 float-left">
+                            <div class="form-group">
+                                <label for="email">From </label>
+                                <input type="date" class="form-control" id="fromdate" placeholder="DD-MM-YY"
+                                    name="fromDate" [(ngModel)]="tabs[prevSelectedTabIndex-1].filters.fromDate">
+                            </div>
+                        </div>
+                        <div class="col-md-6 float-left">
+                            <div class="form-group">
+                                <label for="email">Till </label>
+                                <input type="date" class="form-control" id="tilldate"
+                                    [(ngModel)]="tabs[prevSelectedTabIndex-1].filters.tillDate">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 float-left no-padding">
+                        <div class="form-group chainagePanel">
+                            <label>Chainage</label>
+                            <input type="text" class="form-control" id="chainageFrom" placeholder="Default"
+                                [(ngModel)]="tabs[prevSelectedTabIndex-1].filters.fromChainage">
+                            <input type="text" class="form-control" id="chainageTo" placeholder="Default"
+                                [(ngModel)]="tabs[prevSelectedTabIndex-1].filters.toChainage">
+                        </div>
+                    </div>
+
+                </div>
+                <div style="clear: both;"></div>
+                <div (click)="$event.stopPropagation()" class="col-md-12 customScrollBar filter-assets no-padding"
+                    [style.height.px]="myInnerHeight-250">
+                    <!-- <div class="form-group assets"> -->
+                    <div class="col-md-6 float-left asset"
+                        *ngFor="let asset of tabs[prevSelectedTabIndex-1].filters.assets;let i = index">
+                        <input type="checkbox" name="filterAsset" id="filterAsset-{{i}}" value="{{asset.name}}"
+                            [(ngModel)]="asset.checked" (change)="filterAssetSelected(asset)"
+                            [ngModelOptions]="{standalone: true}" /><label
+                            for="filterAsset-{{i}}">{{formatAssetName(asset.name)}}</label>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <div class="col-md-12 no-padding text-center">
+                    <button class="btn btn-blue applybtn" value="Apply" (click)="applyFilter()">Apply</button>
+                </div>
+
+            </mat-menu>
+        </div>
+        <!-- <div class="filter" style="width: 150px;">
+            <img width="15" src="../../../../assets/images/group.png" /><a>COMBINE GROUP</a>
+        </div> -->
+
+
+    </div>
+    <!--  -->
+    <mat-tab-group #tabGroup class="col-md-12 no-padding" animationDuration="0ms" [(selectedIndex)]="selectedTabIndex"
+        (selectedTabChange)="onTabChanged($event);">
+
+        <mat-tab *ngFor="let tab of tabs; let index = index" label="{{tab.date}}">
+            <ng-template mat-tab-label>
+                <div>{{tab.date}}</div>
+                <button *ngIf="tab.date !== 'Unaudited'" style="color:black;background: none;border: none;"
+                    mat-icon-button (click)="closeTab(index)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </ng-template>
+            <feed-dynamic-content [anomalies]="tab.anomalies" [selectedTabIndex]="selectedTabIndex" [tabIndex]="index"
+                [historyDates]="historyDates" [totalAnomalyCount]="tab.totalAnomalyCount"
+                *ngIf="!tab.date.includes('Print')" (scrollEnd)="scrollToEnd(index)"
+                (sortByDateAsc)="sortByDateAsc($event,index)"></feed-dynamic-content>
+
+            <print-feed [anomalies]="tab.anomalies" [tabIndex]="index" [tabName]="tab.date"
+                *ngIf="tab.date.includes('Print')">
+
+            </print-feed>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
