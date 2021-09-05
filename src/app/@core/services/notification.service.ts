@@ -31,13 +31,13 @@ export class NotificationService {
    * RefreshEveryFewSeconds
    */
   public RefreshEveryFewSeconds() {
-    setTimeout(() => {
-      if (this.user.currentUserValue != null && this.socket.ioSocket.connected) {
-        this.socket.emit("reloadPage", "5");
-        console.log("reload sent every 10 mints");
-        this.RefreshEveryFewSeconds();
-      }
-    }, 600 * 1000);
+    // setTimeout(() => {
+    //   if (this.user.currentUserValue != null && this.socket.ioSocket.connected) {
+    //     this.socket.emit("reloadPage", "5");
+    //     console.log("reload sent every 10 mints");
+    //     this.RefreshEveryFewSeconds();
+    //   }
+    // }, 600 * 1000);
   }
 
   /**
